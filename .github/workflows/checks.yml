@@ -8,6 +8,11 @@ jobs:
     name: Test and lint
     runs-on: ubuntu-latest
     steps:
+      - name: Debug secrets
+        run: |
+          echo "DOCKERHUB_NESTECK_USER: ${{ secrets.DOCKERHUB_NESTECK_USER }}"
+          echo "DOCKERHUB_NESTECK_TOKEN: ${{ secrets.DOCKERHUB_NESTECK_TOKEN }}"
+      
       - name: login to docker hub
         uses: docker/login-action@v1
         with:
