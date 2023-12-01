@@ -1,6 +1,6 @@
 
-from pathlib import Path
 import os
+from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -10,13 +10,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-hks^z1x($@r_ffo=rv71i@qn87%f+s!t-b(=81lr*g-f2@l#i8'
+SECRET_KEY = os.environ.get('SECRET_KEY','changeme')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(int(os.environ.get('DEBUG',0)))
 
+# print("allowed host:")
+# print(os.environ.get('ALLOWED_HOSTS'))
 ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS.extend(
+    filter(None, 
+           os.environ.get('ALLOWED_HOSTS', '').split(','),
+           )
+    )
 
 # Application definition
 
@@ -68,14 +74,18 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+# print(os.environ.get('DB_NAME'))
+# print(os.environ.get('DB_USER'))
+# print(os.environ.get('DB_PASS'))
+# print(os.environ.get('DB_HOST'))
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': os.environ.get('DB_HOST'),
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASS'),
+        'HOST': os.environ.get('DB_HOST', 'localhost'),  # Default to 'localhost' if not set
+        'NAME': os.environ.get('DB_NAME', 'default'),    # Default to 'default' if not set
+        'USER': os.environ.get('DB_USER', 'user'),       # Default to 'user' if not set
+        'PASSWORD': os.environ.get('DB_PASS', ''),        # Default to an empty string if not set
         'PORT': '5432',
     }
 }
@@ -117,14 +127,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
-MEDIA_URL = '/images/'
+STATIC_URL = '/static/static/'
+MEDIA_URL = '/static/media/'
+
+MEDIA_ROOT = 'vol/web/media'
+STATIC_ROOT = 'vol/web/static'
 
 STATICFILES_DIR = [
     BASE_DIR / 'static'
 ]
-
-MEDIA_ROOT = 'static/images'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
