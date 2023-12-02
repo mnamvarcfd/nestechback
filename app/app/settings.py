@@ -133,7 +133,7 @@ MEDIA_URL = '/static/media/'
 MEDIA_ROOT = 'vol/web/media'
 STATIC_ROOT = 'vol/web/static'
 
-STATICFILES_DIR = [
+STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
 
