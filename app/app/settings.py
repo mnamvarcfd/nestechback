@@ -24,8 +24,8 @@ ALLOWED_HOSTS.extend(
            )
     )
 
-# print("allowed host:")
-# print(os.environ.get('ALLOWED_HOSTS'))
+print("====================================Allowed host:")
+print(ALLOWED_HOSTS)
 
 # Application definition
 
@@ -77,10 +77,10 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-print(f"DB_NAME: {os.environ.get('DB_NAME')}")
-print(f"DB_USER: {os.environ.get('DB_USER')}")
-print(f"DB_PASS: {os.environ.get('DB_PASS')}")
-print(f"DB_HOST: {os.environ.get('DB_HOST')}")
+# print(f"DB_NAME: {os.environ.get('DB_NAME')}")
+# print(f"DB_USER: {os.environ.get('DB_USER')}")
+# print(f"DB_PASS: {os.environ.get('DB_PASS')}")
+# print(f"DB_HOST: {os.environ.get('DB_HOST')}")
 
 DATABASES = {
     'default': {
