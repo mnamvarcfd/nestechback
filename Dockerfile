@@ -11,7 +11,7 @@ COPY ./app /app
 WORKDIR /app
 EXPOSE 8000
 
-ARG DEV=true
+ARG DEV=false
 
 RUN python -m venv /py
 RUN /py/bin/pip install --upgrade pip
