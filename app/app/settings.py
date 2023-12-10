@@ -17,12 +17,15 @@ DEBUG = bool(int(os.environ.get('DEBUG',1)))
 
 # print("allowed host:")
 # print(os.environ.get('ALLOWED_HOSTS'))
-ALLOWED_HOSTS = []
-ALLOWED_HOSTS.extend(
-    filter(None, 
-           os.environ.get('ALLOWED_HOSTS', '').split(','),
-           )
-    )
+# ALLOWED_HOSTS = []
+# ALLOWED_HOSTS.extend(
+#     filter(None, 
+#            os.environ.get('ALLOWED_HOSTS', '').split(','),
+#            )
+#     )
+
+ALLOWED_HOSTS: ['127.0.0.1', '99.79.74.158', 'ec2-99-79-74-158.ca-central-1.compute.amazonaws.com']
+
 
 print("====================================Allowed host:")
 print(ALLOWED_HOSTS)
