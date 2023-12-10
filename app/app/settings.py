@@ -24,7 +24,7 @@ DEBUG = bool(int(os.environ.get('DEBUG',1)))
 #            )
 #     )
 
-ALLOWED_HOSTS: ['127.0.0.1', '99.79.74.158', 'ec2-99-79-74-158.ca-central-1.compute.amazonaws.com']
+ALLOWED_HOSTS = ['127.0.0.1', '99.79.74.158', 'ec2-99-79-74-158.ca-central-1.compute.amazonaws.com']
 
 
 print("====================================Allowed host:")
