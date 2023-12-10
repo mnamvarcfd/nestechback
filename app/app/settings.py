@@ -15,8 +15,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY','changeme')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(int(os.environ.get('DEBUG',0)))
 
-print("allowed host:")
-print(os.environ.get('ALLOWED_HOSTS'))
+# print("allowed host:")
+# print(os.environ.get('ALLOWED_HOSTS'))
 ALLOWED_HOSTS = []
 ALLOWED_HOSTS.extend(
     filter(None, 
@@ -24,8 +24,8 @@ ALLOWED_HOSTS.extend(
            )
     )
 
-print("allowed host after:")
-print(os.environ.get('ALLOWED_HOSTS'))
+# print("allowed host:")
+# print(os.environ.get('ALLOWED_HOSTS'))
 
 # Application definition
 
@@ -77,10 +77,10 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-# print(os.environ.get('DB_NAME'))
-# print(os.environ.get('DB_USER'))
-# print(os.environ.get('DB_PASS'))
-# print(os.environ.get('DB_HOST'))
+print(f"DB_NAME: {os.environ.get('DB_NAME')}")
+print(f"DB_USER: {os.environ.get('DB_USER')}")
+print(f"DB_PASS: {os.environ.get('DB_PASS')}")
+print(f"DB_HOST: {os.environ.get('DB_HOST')}")
 
 DATABASES = {
     'default': {
@@ -88,7 +88,7 @@ DATABASES = {
         'HOST': os.environ.get('DB_HOST', 'localhost'),  # Default to 'localhost' if not set
         'NAME': os.environ.get('DB_NAME', 'default'),    # Default to 'default' if not set
         'USER': os.environ.get('DB_USER', 'user'),       # Default to 'user' if not set
-        'PASSWORD': os.environ.get('DB_PASS', ''),        # Default to an empty string if not set
+        'PASSWORD': os.environ.get('DB_PASS', 'dummypassword'),        # Default to an empty string if not set
         'PORT': '5432',
     }
 }
@@ -130,10 +130,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/static/static/'
 STATIC_ROOT = '/vol/web/static'
 
-MEDIA_URL = '/media/'
+MEDIA_URL = '/static/media/'
 MEDIA_ROOT = '/vol/web/media'
 
 # STATICFILES_DIRS = [
