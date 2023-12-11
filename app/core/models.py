@@ -51,3 +51,12 @@ class Services(models.Model):
     
     def __str__(self) -> str:
         return self.title
+
+
+class BackgroundVideo(models.Model):
+    _id = models.AutoField(primary_key=True, editable=False)
+    title = models.CharField(max_length=100, null=False, blank=False)
+    video = models.FileField(null=False, blank=False)
+    
+    def __str__(self) -> str:
+        return self.title
