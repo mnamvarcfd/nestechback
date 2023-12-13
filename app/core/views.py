@@ -21,11 +21,11 @@ def get_team_members(request):
     serilazer = TeamMembersSerializer(members, many=True)
     return Response(serilazer.data)
     
-@api_view(['GET'])
-def get_team_member(request, pk):
-    member = TeamMembers.objects.get(_id=pk)
-    serilazer = TeamMembersSerializer(member, many=False)
-    return Response(serilazer.data)
+# @api_view(['GET'])
+# def get_team_member(request, pk):
+#     member = TeamMembers.objects.get(_id=pk)
+#     serilazer = TeamMembersSerializer(member, many=False)
+#     return Response(serilazer.data)
     
 
 @api_view(['GET'])
@@ -56,4 +56,39 @@ def get_video(request):
     video_file = video.video.path
 
     response = FileResponse(open(video_file, 'rb'))
+    return response
+
+@api_view(['GET'])
+def get_team_member_imag(request):
+    _id = request.GET.get('_id')
+    
+    if _id is None:
+        return JsonResponse({"error": "_id parameter is required"}, status=400)
+
+    try:
+        team_member = get_object_or_404(TeamMembers, _id=_id)
+    except TeamMembers.DoesNotExist:
+        return JsonResponse({"error": "image not found"}, status=404)
+
+    imag_file = team_member.image.path
+
+    response = FileResponse(open(imag_file, 'rb'))
+    return response
+
+
+@api_view(['GET'])
+def get_service_imag(request):
+    _id = request.GET.get('_id')
+    
+    if _id is None:
+        return JsonResponse({"error": "_id parameter is required"}, status=400)
+
+    try:
+        service = get_object_or_404(Services, _id=_id)
+    except Services.DoesNotExist:
+        return JsonResponse({"error": "image not found"}, status=404)
+
+    imag_file = service.image.path
+
+    response = FileResponse(open(imag_file, 'rb'))
     return response
