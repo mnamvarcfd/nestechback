@@ -42,13 +42,18 @@ def get_all_video(request):
     return Response(serilazer.data)
     
 @api_view(['GET'])
-def get_video(request, _id):
+def get_video(request):
+    _id = request.GET.get('_id')
+    
+    if _id is None:
+        return JsonResponse({"error": "_id parameter is required"}, status=400)
+
     try:
         video = get_object_or_404(BackgroundVideo, _id=_id)
     except BackgroundVideo.DoesNotExist:
-        return Response({"error": "Video not found"}, status=404)
+        return JsonResponse({"error": "Video not found"}, status=404)
 
-    video_file = video.video.path  # Assuming the video field is a FileField
-    print("{video_file}")
+    video_file = video.video.path
+
     response = FileResponse(open(video_file, 'rb'))
     return response
