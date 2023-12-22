@@ -140,11 +140,11 @@ def get_project_imag(request):
         return JsonResponse({"error": "_id parameter is required"}, status=400)
 
     try:
-        service = get_object_or_404(Services, _id=_id)
+        project = get_object_or_404(Projects, _id=_id)
     except Projects.DoesNotExist:
         return JsonResponse({"error": "image not found"}, status=404)
 
-    imag_file = service.image.path
+    imag_file = project.image.path
 
     response = FileResponse(open(imag_file, 'rb'))
     return response
