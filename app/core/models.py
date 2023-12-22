@@ -53,6 +53,17 @@ class Services(models.Model):
         return self.title
 
 
+class Projects(models.Model):
+    _id = models.AutoField(primary_key=True, editable=False)
+    title = models.CharField(max_length=100, null=True, blank=True)
+    description = models.TextField(max_length=400, null=True, blank=True)
+    image = models.ImageField(null=True, blank=True)
+    
+    def __str__(self) -> str:
+        return self.title
+
+
+
 class BackgroundVideo(models.Model):
     _id = models.AutoField(primary_key=True, editable=False)
     title = models.CharField(max_length=100, null=False, blank=False)
@@ -60,3 +71,11 @@ class BackgroundVideo(models.Model):
     
     def __str__(self) -> str:
         return self.title
+
+class Contact(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    message = models.TextField()
+
+    def __str__(self):
+        return self.email
